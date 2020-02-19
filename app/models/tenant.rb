@@ -8,8 +8,6 @@ class Tenant < ApplicationRecord
 
     def self.create_new_tenant(tenant_params, user_params, coupon_params)
 
-      debugger
-      
       # tenant = Tenant.new(:name => tenant_params[:name])
       tenant = Tenant.new(tenant_params)
 
