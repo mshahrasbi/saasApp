@@ -1,4 +1,11 @@
 Rails.application.routes.draw do
+
+  # we want the 'projects' routes be under 'tenants' routes: -->  rake routes | grep projects  
+  # this will show nested routes we want for our project.
+  resources :tenants do
+    resources :projects
+  end
+
   resources :members
   get 'home/index'
   root :to => "home#index"
