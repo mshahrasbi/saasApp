@@ -11,7 +11,7 @@ class Project < ApplicationRecord
   end
 
   # these two methods will be temp and be removed later
-  def self.by_plan_and_tenant(tenant_id) 
+  def self.by_user_plan_and_tenant(tenant_id, user) 
     tenant = Tenant.find(tenant_id)
     if tenant.plan == 'premium'
        tenant.projects
