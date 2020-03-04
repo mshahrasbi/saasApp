@@ -71,11 +71,11 @@ class ProjectsController < ApplicationController
     end
 
     def set_tenant
-      @tenant = Tenant.find([:tenant_id])
+      @tenant = Tenant.find(params[:tenant_id])
     end
 
     def verify_tenant
-      unless params[:tenant_id] == Tenant.current_tenant_id_to_s
+      unless params[:tenant_id] == Tenant.current_tenant_id.to_s
         redirect_to :root, flash: {error: 'You are not authorized to access any organization other than your own'}
       end 
     end

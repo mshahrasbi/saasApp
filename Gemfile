@@ -11,6 +11,10 @@ gem 'pg', '>= 0.18', '< 2.0'
 gem 'devise'
 gem 'milia'
 
+# Use jquery as the JavaScript library
+gem 'jquery-rails'
+
+
 # Use Puma as the app server
 gem 'puma', '~> 3.11'
 # Use SCSS for stylesheets
@@ -39,6 +43,8 @@ gem 'jbuilder', '~> 2.5'
 
 gem 'twitter-bootstrap-rails'
 gem 'devise-bootstrap-views'
+
+gem 'bootstrap-datepicker-rails'
 
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.1.0', require: false
