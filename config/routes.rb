@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  resources :artifacts
   # we want the 'projects' routes be under 'tenants' routes: -->  rake routes | grep projects  
   # this will show nested routes we want for our project.
   resources :tenants do
