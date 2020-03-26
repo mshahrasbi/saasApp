@@ -10,6 +10,8 @@ gem 'pg', '>= 0.18', '< 2.0'
 
 gem 'devise'
 gem 'milia'
+gem 'aws-sdk'
+gem 'stripe'
 
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
