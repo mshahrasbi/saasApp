@@ -7,8 +7,46 @@ class TenantsController < ApplicationController
 
     end
 
+    def update
+        respond_to do |format|
+            Tenant.transaction do
+                if @tenant.update(tenant_params)
+                    if @tenant.plan =="primum" && @tenant.payment.blank?
+                        @payment = Payment.new({ email: tenant_params["email"], token: params[:payment]["token"], tenant: @tenant })
+
+                        begin
+                            @payment.process_payment
+                            @payment.save
+                        rescue Exception => exception
+                            flash[:error] = exception.message
+                            @payment.destroy
+                            @tenant.paln = "free"
+                            @tenant.save
+
+                            redirect_to edit_tenant_path(@tenant) and return
+                        end
+                    end
+                    format.html { redirect_to edit_plan_path, notice: "Plan was successfully updated" }
+                else
+                    format.html { render :edit }
+                end
+            end
+        end
+    end
+
+    def change 
+        @tenant = Tenant.find( params[:id] )
+        Tenant.set_current_tenant @tenant.id
+        session[:tenant_id] = Tanent.current_tenant.id
+        redirect_to home_index_path, notice: "Switched to organization #{ @tenant.name } "
+    end
+
     private
     def set_tenant
         @tenant = Tenant.find(Tenant.current_tenant_id)
+    end
+
+    def tenant_params
+        params.require(:tenant).permit(:name, :plan)
     end
 end
